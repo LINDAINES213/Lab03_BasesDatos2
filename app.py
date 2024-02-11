@@ -1,6 +1,7 @@
 from pymongo import MongoClient
 from faker import Faker
 from datetime import datetime
+import csv
 
 def get_database():
     # Provide the mongodb atlas url to connect python to mongodb using pymongo
@@ -15,6 +16,7 @@ def get_database():
 
 def insert_random_books(collection):
     fake = Faker()
+    books_data = []
     for _ in range(10):  # Inserting 10 random books as an example
         book = {
             "title": fake.catch_phrase(),
@@ -29,9 +31,12 @@ def insert_random_books(collection):
             "availability": fake.random_number(digits=2)
         }
         collection.insert_one(book)
+        books_data.append(book)
+    return books_data
 
 def insert_random_authors(collection):
     fake = Faker()
+    authors_data = []
     for _ in range(5):  # Inserting 5 random authors as an example
         author = {
             "name": fake.name(),
@@ -43,6 +48,15 @@ def insert_random_authors(collection):
             "country": fake.country()
         }
         collection.insert_one(author)
+        authors_data.append(author)
+    return authors_data
+
+def export_to_csv(data, filename):
+    with open(filename, 'w', newline='', encoding='utf-8') as csvfile:
+        writer = csv.writer(csvfile)
+        writer.writerow(data[0].keys())
+        for row in data:
+            writer.writerow(row.values())
 
 if __name__ == "__main__":
     # Get the database
@@ -50,10 +64,12 @@ if __name__ == "__main__":
 
     # Insert random books
     books_collection = dbname["books"]
-    insert_random_books(books_collection)
+    books_data = insert_random_books(books_collection)
+    export_to_csv(books_data, 'books_data.csv')
 
     # Insert random authors
     authors_collection = dbname["authors"]
-    insert_random_authors(authors_collection)
+    authors_data = insert_random_authors(authors_collection)
+    export_to_csv(authors_data, 'authors_data.csv')
 
     print("Data insertion completed.")

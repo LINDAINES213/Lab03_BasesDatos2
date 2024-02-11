@@ -1,0 +1,6 @@
+name,id,num_publications,age,gender,email,country,_id
+Michelle Kelley,41f29fca-6bfd-4c1c-ba8e-fbb06118e05a,25,50,Male,katherine29@example.org,Jamaica,65c80e62e225459b9f969f0a
+Abigail Robinson,d52d99a9-70e9-44b3-ab6d-8d51d21d1089,31,26,Female,hinesdale@example.com,Cayman Islands,65c80e62e225459b9f969f0b
+Damon Day,af70142b-b5c2-4d64-89c1-efa40d4c0130,59,84,Male,eperkins@example.com,Portugal,65c80e62e225459b9f969f0c
+Thomas Barnes,b904ce40-fb73-458e-8d12-5c50cf043ace,13,44,Female,hannahbrooks@example.net,Bahrain,65c80e62e225459b9f969f0d
+Nancy Bush,76d082de-5bc4-4918-be89-6740fb200903,36,55,Female,lopezaustin@example.net,Chad,65c80e62e225459b9f969f0e
