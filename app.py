@@ -4,20 +4,18 @@ from datetime import datetime
 import csv
 
 def get_database():
-    # Provide the mongodb atlas url to connect python to mongodb using pymongo
+
     #CONNECTION_STRING = "mongodb+srv://grupoDinamita:GrupoDinamita3@lab03.sutnr1c.mongodb.net/"
     CONNECTION_STRING = "mongodb://localhost:27017"
 
-    # Create a connection using MongoClient. You can import MongoClient or use pymongo.MongoClient
     client = MongoClient(CONNECTION_STRING)
 
-    # Create the database for our example (we will use the same database throughout the tutorial)
     return client['Lab03']
 
 def insert_random_books(collection):
     fake = Faker()
     books_data = []
-    for _ in range(10):  # Inserting 10 random books as an example
+    for _ in range(10000):  
         book = {
             "title": fake.catch_phrase(),
             "author": fake.name(),
@@ -37,7 +35,7 @@ def insert_random_books(collection):
 def insert_random_authors(collection):
     fake = Faker()
     authors_data = []
-    for _ in range(5):  # Inserting 5 random authors as an example
+    for _ in range(10000):  
         author = {
             "name": fake.name(),
             "id": fake.uuid4(),
