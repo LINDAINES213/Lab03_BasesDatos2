@@ -5,8 +5,8 @@ import csv
 
 def get_database():
 
-    #CONNECTION_STRING = "mongodb+srv://grupoDinamita:GrupoDinamita3@lab03.sutnr1c.mongodb.net/"
-    CONNECTION_STRING = "mongodb://localhost:27017"
+    CONNECTION_STRING = "mongodb+srv://grupoDinamita:GrupoDinamita3@lab03.sutnr1c.mongodb.net/"
+    #CONNECTION_STRING = "mongodb://localhost:27017"
 
     client = MongoClient(CONNECTION_STRING)
 
@@ -15,17 +15,32 @@ def get_database():
 def insert_random_books(collection):
     fake = Faker()
     books_data = []
+    publisher = [
+        "Editorial Mirahadas",
+        "Errara Natura",
+        "Pre-textos",
+        "Sexto Piso",
+        "Nórdica",
+        "Acantilado",
+        "De Conatus",
+        "Cabaret Voltaire",
+        "La Huerta Grande",
+        "Impedimenta",
+        "La Umbría y la Solana",
+        "Blackie Books"
+    ]
+    genres = ["Fantasy", "Science Fiction", "Action & Adventure", "Mystery", "Horror", "Self-Help", "Romance", "Historical"]
     for _ in range(10000):  
         book = {
             "title": fake.catch_phrase(),
             "author": fake.name(),
-            "genre": fake.word(),
-            "publication_year": fake.year(),
-            "publisher": fake.company(),
+            "genre": fake.random_element(elements = genres),
+            "publication_date": fake.date(),
+            "publisher": fake.random_element(elements = publisher),
             "pages": fake.random_number(digits=3),
             "price": fake.random_number(digits=2),
             "sales": fake.random_number(digits=4),
-            "user_rating": round(fake.random.uniform(1, 5), 1),
+            "user_rating": round(fake.random.uniform(1, 10), 1),
             "availability": fake.random_number(digits=2)
         }
         collection.insert_one(book)
